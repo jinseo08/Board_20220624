@@ -31,6 +31,9 @@ public class BoardEntity extends BaseEntity{
     @Column(name = "boardHits")
     private int boardHits;
 
+    @Column
+    private String boardFileName;
+
     public static BoardEntity toBoardDTO(BoardDTO boardDTO) {
         BoardEntity boardEntity = new BoardEntity();
         boardEntity.setBoardTitle(boardDTO.getBoardTitle());
@@ -38,6 +41,7 @@ public class BoardEntity extends BaseEntity{
         boardEntity.setBoardPassword(boardDTO.getBoardPassword());
         boardEntity.setBoardContents(boardDTO.getBoardContents());
         boardEntity.setBoardHits(0);
+        boardEntity.setBoardFileName(boardDTO.getBoardFileName());
         return boardEntity;
     }
 

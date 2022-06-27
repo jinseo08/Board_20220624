@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
@@ -21,6 +22,8 @@ public class BoardDTO {
     private int boardHits;
     private LocalDateTime createdTime;
     private LocalDateTime updatedTime;
+    private String boardFileName;
+    private MultipartFile boardFile;
 
 
     public static BoardDTO toBoardETO(BoardEntity board) {
@@ -33,6 +36,15 @@ public class BoardDTO {
         boardDTO.setBoardHits(board.getBoardHits());
         boardDTO.setCreatedTime(board.getCreatedTime());
         boardDTO.setUpdatedTime(board.getUpdatedTime());
+        boardDTO.setBoardFileName(board.getBoardFileName());
         return boardDTO;
+    }
+
+    public BoardDTO(Long id, String boardTitle, String boardWriter, int boardHits, LocalDateTime createdTime) {
+        this.id = id;
+        this.boardTitle = boardTitle;
+        this.boardWriter = boardWriter;
+        this.boardHits = boardHits;
+        this.createdTime = createdTime;
     }
 }
