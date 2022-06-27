@@ -24,8 +24,72 @@
         <td th:text="${board.updatedTime}"></td>
     </tr>
 </table>
-<a href="#">글수정</a>
-<a href="#">글삭제</a>
+<!--<button onclick="updateReq()">수정</button>-->
+<!--<button onclick="deleteReq()">삭제</button>-->
 
+<button onclick="req(1)">수정</button>
+<button onclick="req(2)">삭제</button>
+<div id="pwCk"></div>
 </body>
+<script th:inline="javascript">
+    // function updateReq(){
+    //     document.getElementById("pwCk").innerHTML = "비밀번호를 입력하세요" + "<input type='text' id='pw'>" + "<button onClick='pwCk1()'>확인</button>"
+    // }
+    //
+    // function pwCk1(){
+    //     const pwConfirm = document.getElementById("pw").value;
+    //     // console.log(pwConfirm);
+    //     const id = [[${board.id}]];
+    //     const password = [[${board.boardPassword}]];
+    //     if(password == pwConfirm){
+    //         alert("같아요");
+    //         //수정화면요청
+    //         location.href = "/board/update/"+id;
+    //     }else {
+    //         alert("틀려요");
+    //     }
+    // }
+    //
+    // function deleteReq(){
+    //     document.getElementById("pwCk").innerHTML = "비밀번호를 입력하세요" + "<input type='text' id='pw'>" + "<button onClick='pwCk2()'>확인</button>"
+    //
+    // }
+    //
+    // function pwCk2(){
+    //     const pwConfirm = document.getElementById("pw").value;
+    //     // console.log(pwConfirm);
+    //     const id = [[${board.id}]];
+    //     const password = [[${board.boardPassword}]];
+    //     if(password == pwConfirm){
+    //         alert("같아요");
+    //         //수정화면요청
+    //         location.href = "/board/delete/"+id;
+    //     }else {
+    //         alert("틀려요");
+    //     }
+    // }
+
+    function req(num){
+        document.getElementById("pwCk").innerHTML = "비밀번호를 입력하세요" + "<input type='text' id='pw'>" + "<button onClick='pwCk("+num+")'>확인</button>"
+    }
+
+
+    function pwCk(num){
+        console.log("pwCk",num)
+        const pwConfirm = document.getElementById("pw").value;
+        console.log(pwConfirm);
+        const id = [[${board.id}]];
+        const password = [[${board.boardPassword}]];
+        if(password == pwConfirm){
+            if(num==1){
+                location.href = "/board/update/"+id;
+            }else {
+                location.href = "/board/delete/"+id;
+            }
+        }else {
+            alert("틀려요");
+        }
+    }
+
+</script>
 </html>
