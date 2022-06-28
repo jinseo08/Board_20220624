@@ -100,4 +100,14 @@ public class BoardService {
                 ));
         return boardList;
     }
+
+    public List<BoardDTO> search(String q) {
+        List<BoardEntity> boardEntityList = boardRepository.findByBoardTitleContaining(q);
+        List<BoardDTO> boardDTOList = new ArrayList<>();
+        for(BoardEntity boardEntity : boardEntityList){
+            boardDTOList.add(BoardDTO.toBoardETO(boardEntity));
+        }
+        return boardDTOList;
+
+    }
 }

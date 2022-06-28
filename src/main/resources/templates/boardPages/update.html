@@ -5,6 +5,8 @@
     <title>Title</title>
 </head>
 <body>
+<th:block th:replace="commonPages/header :: header"></th:block>
+
 <form action="/board/update" method="post">
     <input type="hidden" name="id" th:value="${boardUpdate.id}">
     <input type="text" name="boardTitle" th:value="${boardUpdate.boardTitle}">

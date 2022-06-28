@@ -5,6 +5,7 @@
     <title>save</title>
 </head>
 <body>
+<th:block th:replace="commonPages/header :: header"></th:block>
 <form action="/board/save" method="post" enctype="multipart/form-data">
     <input type="text" name="boardTitle" placeholder="제목"></br>
     <input type="text" name="boardWriter" placeholder="작성"></br>
