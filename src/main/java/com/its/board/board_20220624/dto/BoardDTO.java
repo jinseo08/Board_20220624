@@ -47,4 +47,11 @@ public class BoardDTO {
         this.boardHits = boardHits;
         this.createdTime = createdTime;
     }
+
+    public BoardDTO(String boardTitle, String boardWriter, String boardPassword, String boardContents) {
+        this.boardTitle = boardTitle;
+        this.boardWriter = boardWriter;
+        this.boardPassword = boardPassword;
+        this.boardContents = boardContents;
+    }
 }

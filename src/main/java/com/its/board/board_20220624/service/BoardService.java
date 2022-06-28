@@ -3,7 +3,9 @@ package com.its.board.board_20220624.service;
 import com.its.board.board_20220624.common.PagingConst;
 import com.its.board.board_20220624.dto.BoardDTO;
 import com.its.board.board_20220624.entity.BoardEntity;
+import com.its.board.board_20220624.entity.MemberEntity;
 import com.its.board.board_20220624.repository.BoardRepository;
+import com.its.board.board_20220624.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,6 +26,7 @@ import java.util.Optional;
 public class BoardService {
 
     private final BoardRepository boardRepository;
+    private final MemberRepository memberRepository;
 
     public Long save(BoardDTO boardDTO) throws IOException {
         MultipartFile boardFile = boardDTO.getBoardFile();
@@ -34,9 +37,16 @@ public class BoardService {
             boardFile.transferTo(new File(savePath));
         }
         boardDTO.setBoardFileName(boardFilename);
-        BoardEntity boardEntity = BoardEntity.toBoardDTO(boardDTO);
-        Long id = boardRepository.save(boardEntity).getId();
-        return id;
+        //toBoardDTO 메서드에 회원엔티티를 같이 전달해야 함.
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberEmail(boardDTO.getBoardWriter());
+        if(optionalMemberEntity.isPresent()){
+            MemberEntity memberEntity = optionalMemberEntity.get();
+            BoardEntity boardEntity = BoardEntity.toBoardDTO(boardDTO, memberEntity);
+            Long id = boardRepository.save(boardEntity).getId();
+            return id;
+        }else {
+            return null;
+        }
     }
 
 
