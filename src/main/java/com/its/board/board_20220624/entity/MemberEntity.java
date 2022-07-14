@@ -36,6 +36,8 @@ public class MemberEntity extends BaseEntity{
 //    private List<BoardEntity> boardEntityList = new ArrayList<>();
 
     // on delete set null
+
+    // 한쪽이 참조 했을 경우 다른쪽 리스트 불러올수있음
     @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.PERSIST, orphanRemoval = false, fetch = FetchType.LAZY)
     private List<BoardEntity> boardEntityList = new ArrayList<>();
 
